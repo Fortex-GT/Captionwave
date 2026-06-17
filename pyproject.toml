@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "captionwave"
+version = "0.1.0"
+description = "Genera audio + subtítulos animados sincronizados (.ass/.srt) a partir de texto, con emojis compatibles con iOS."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Tu Nombre" }]
+keywords = ["subtitles", "captions", "tts", "ass", "shorts", "reels", "tiktok", "karaoke", "emoji"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Multimedia :: Video",
+]
+dependencies = [
+    "edge-tts>=6.1",
+    "emoji>=2.8",
+]
+
+[project.optional-dependencies]
+# Mejora la precisión de la duración del audio (recomendado).
+duration = ["mutagen>=1.45"]
+# Para los ejemplos que montan el video.
+video = ["moviepy>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/TU_USUARIO/captionwave"
+Repository = "https://github.com/TU_USUARIO/captionwave"
+
+[tool.setuptools.packages.find]
+where = ["src"]
