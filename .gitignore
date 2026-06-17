@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Salidas generadas
+*.mp3
+*.mp4
+*.ass
+*.srt
+emojis.json
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
