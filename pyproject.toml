@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,14 +8,23 @@ version = "0.1.0"
 description = "Genera audio + subtítulos animados sincronizados (.ass/.srt) a partir de texto, con emojis compatibles con iOS."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "MIT" }
-authors = [{ name = "Tu Nombre" }]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Wilfredo Guillén", email = "wilfredoguillensalazar@gmail.com" }]
 keywords = ["subtitles", "captions", "tts", "ass", "shorts", "reels", "tiktok", "karaoke", "emoji"]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
     "Topic :: Multimedia :: Video",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
 ]
 dependencies = [
     "edge-tts>=6.1",
@@ -27,10 +36,13 @@ dependencies = [
 duration = ["mutagen>=1.45"]
 # Para los ejemplos que montan el video.
 video = ["moviepy>=2.0"]
+# Para ejecutar la batería de tests (offline).
+test = ["pytest>=7"]
 
 [project.urls]
-Homepage = "https://github.com/TU_USUARIO/captionwave"
-Repository = "https://github.com/TU_USUARIO/captionwave"
+Homepage = "https://github.com/Fortex-GT/Captionwave"
+Repository = "https://github.com/Fortex-GT/Captionwave"
+Issues = "https://github.com/Fortex-GT/Captionwave/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
