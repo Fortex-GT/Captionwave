@@ -16,6 +16,37 @@ import os
 import edge_tts
 
 
+def _run_sync(coro):
+    """Ejecuta una corrutina de forma síncrona, también dentro de Jupyter/Colab.
+
+    En un script normal basta con ``asyncio.run``. Pero en notebooks (Google
+    Colab, Jupyter) ya hay un event loop corriendo y ``asyncio.run`` fallaría
+    con "cannot be called from a running event loop"; en ese caso la corrutina
+    se ejecuta en un hilo aparte con su propio loop.
+    """
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(coro)  # no hay loop activo: caso normal (script)
+
+    import threading
+
+    box = {}
+
+    def _worker():
+        try:
+            box["value"] = asyncio.run(coro)
+        except BaseException as exc:  # se re-lanza en el hilo principal
+            box["error"] = exc
+
+    t = threading.Thread(target=_worker)
+    t.start()
+    t.join()
+    if "error" in box:
+        raise box["error"]
+    return box["value"]
+
+
 def _try_duration(path: str):
     """Intenta leer la duración real del MP3 con mutagen, si está instalado."""
     try:
@@ -74,7 +105,7 @@ def synthesize_segments(parts, voice: str = "es-MX-DaliaNeural",
            ("el sol es una estrella", "+18%")]
     """
     try:
-        words = asyncio.run(_run(list(parts), voice, out_path))
+        words = _run_sync(_run(list(parts), voice, out_path))
     except Exception as e:
         # No dejes un .mp3 vacío/parcial tras un fallo.
         try:

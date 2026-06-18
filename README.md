@@ -14,10 +14,16 @@ La librería **no arma el video final**: te entrega los archivos (audio + subtí
 ## Instalación
 
 ```bash
-pip install captionwave
+pip install captionwave          # una vez publicado en PyPI
 ```
 
-Desde el código fuente (este repositorio):
+Mientras tanto —o en notebooks como Google Colab— instálalo desde GitHub:
+
+```bash
+pip install "git+https://github.com/Fortex-GT/Captionwave.git"
+```
+
+O desde el código fuente (este repositorio):
 
 ```bash
 pip install .          # o, para desarrollo:  pip install -e .
