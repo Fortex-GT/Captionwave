@@ -17,8 +17,14 @@ La librería **no arma el video final**: te entrega los archivos (audio + subtí
 pip install captionwave
 ```
 
+Desde el código fuente (este repositorio):
+
+```bash
+pip install .          # o, para desarrollo:  pip install -e .
+```
+
 Requisitos:
-- **Conexión a internet** para la voz (edge-tts usa el servicio de Microsoft Edge).
+- **Conexión a internet** para la voz (edge-tts usa el servicio de Microsoft Edge). Si solo quieres los subtítulos a partir de tiempos que ya tienes, puedes trabajar sin red con `build_from_words(...)` (ver más abajo y `examples/offline_sin_internet.py`).
 - **FFmpeg** instalado si vas a quemar los subtítulos en el video (`ffmpeg -version`).
 - Opcional, recomendado: `pip install captionwave[duration]` (usa *mutagen* para medir con exactitud la duración del audio y alinear el último subtítulo).
 
@@ -59,11 +65,33 @@ r = gen.generate(
 )
 ```
 
+### Sin internet (a partir de tiempos que ya tienes)
+
+Si ya tienes los tiempos por palabra (de otra fuente o para hacer pruebas),
+puedes generar los subtítulos **sin TTS ni conexión** con `build_from_words`:
+
+```python
+from captionwave import CaptionGenerator
+
+words = [
+    {"word": "El",       "start": 0.00, "dur": 0.18},
+    {"word": "Sol",      "start": 0.18, "dur": 0.34},
+    {"word": "es",       "start": 0.52, "dur": 0.16},
+    {"word": "una",      "start": 0.68, "dur": 0.18},
+    {"word": "estrella", "start": 0.86, "dur": 0.52},
+]
+
+gen = CaptionGenerator(style="hormozi")
+r = gen.build_from_words(words, duration=1.5, out_ass="subs.ass", out_srt="subs.srt")
+```
+
+Devuelve el mismo `dict` que `generate` (con `audio=None`). Ver `examples/offline_sin_internet.py`.
+
 ---
 
 ## Estilos disponibles
 
-![Muestra de estilos](docs/estilos_muestra.png)
+![Muestra de estilos](estilos_muestra.png)
 
 *(Palabra activa "ESTRELLA" resaltada en 4 de los estilos. El resaltado avanza palabra por palabra al ritmo de la voz.)*
 
