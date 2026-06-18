@@ -56,9 +56,23 @@ def _try_duration(path: str):
         return None
 
 
+def _make_communicate(text: str, voice: str, rate: str):
+    """Crea un Communicate pidiendo eventos por palabra (WordBoundary).
+
+    edge-tts >= 7 cambió el valor por defecto del parámetro ``boundary`` a
+    "SentenceBoundary"; sin "WordBoundary" no llegan los tiempos por palabra y
+    los subtítulos saldrían vacíos. En edge-tts < 7 ese parámetro no existe (y
+    el valor por defecto ya era WordBoundary), así que se omite.
+    """
+    try:
+        return edge_tts.Communicate(text, voice, rate=rate, boundary="WordBoundary")
+    except TypeError:
+        return edge_tts.Communicate(text, voice, rate=rate)
+
+
 async def _stream_one(text: str, voice: str, rate: str, fh):
     """Escribe el audio de un segmento en el handle abierto `fh` y devuelve sus palabras."""
-    com = edge_tts.Communicate(text, voice, rate=rate)
+    com = _make_communicate(text, voice, rate)
     words = []
     async for chunk in com.stream():
         if chunk["type"] == "audio":

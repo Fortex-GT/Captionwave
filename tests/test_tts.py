@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 
-from captionwave.tts import _run_sync
+from captionwave.tts import _make_communicate, _run_sync
 
 
 async def _double(x):
@@ -29,3 +29,10 @@ def test_run_sync_propagates_exceptions():
 
     with pytest.raises(ValueError):
         _run_sync(boom())
+
+
+def test_communicate_requests_word_boundary():
+    # edge-tts >= 7 usa "SentenceBoundary" por defecto; necesitamos WordBoundary
+    # para obtener los tiempos por palabra (si no, los subtítulos salen vacíos).
+    com = _make_communicate("hola mundo", "es-MX-DaliaNeural", "+0%")
+    assert getattr(com.tts_config, "boundary", "WordBoundary") == "WordBoundary"

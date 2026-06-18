@@ -27,7 +27,7 @@ classifiers = [
     "Topic :: Multimedia :: Sound/Audio :: Speech",
 ]
 dependencies = [
-    "edge-tts>=6.1",
+    "edge-tts>=7.0",
     "emoji>=2.8",
 ]
 
