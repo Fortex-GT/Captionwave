@@ -53,8 +53,6 @@ async def _run(parts, voice, out_path):
             # avanzar el cursor por la duración de este segmento
             if ws:
                 cursor = todas[-1]["start"] + todas[-1]["dur"]
-            else:
-                cursor = cursor  # segmento sin palabras (raro)
     return todas
 
 

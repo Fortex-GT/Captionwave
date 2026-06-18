@@ -197,9 +197,21 @@ Un `dict` con:
 
 ---
 
+## Desarrollo y tests
+
+```bash
+pip install -e ".[test]"
+pytest
+```
+
+Los tests **no necesitan internet** (no llaman al TTS): cubren los estilos, el
+troceado en líneas, la selección de emojis y la escritura de `.ass`/`.srt`.
+
+---
+
 ## Publicar tu propia copia
 
-> El nombre `captionwave` es provisional. **Antes de subir a PyPI verifica que el nombre esté libre** en https://pypi.org . Si no lo está, renómbralo: cambia el nombre de la carpeta `src/captionwave/` y el campo `name` en `pyproject.toml`.
+> **Antes de subir a PyPI, verifica que el nombre `captionwave` esté libre** en https://pypi.org. Si no lo está, renómbralo: cambia la carpeta `src/captionwave/` y el campo `name` de `pyproject.toml`.
 
 ```bash
 pip install build twine
@@ -213,4 +225,4 @@ Para GitHub solo inicializa el repo y súbelo normal.
 
 ## Licencia
 
-MIT — ver [LICENSE](LICENSE).
+MIT © 2026 Wilfredo Guillén — ver [LICENSE](LICENSE).
