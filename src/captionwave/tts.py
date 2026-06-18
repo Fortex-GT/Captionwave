@@ -11,6 +11,7 @@ Requiere conexión a internet (endpoint de Microsoft Edge TTS).
 
 from __future__ import annotations
 import asyncio
+import os
 
 import edge_tts
 
@@ -74,7 +75,23 @@ def synthesize_segments(parts, voice: str = "es-MX-DaliaNeural",
     parts: lista de tuplas (texto, rate). Ej: [("¿Sabías que...?", "+25%"),
            ("el sol es una estrella", "+18%")]
     """
-    words = asyncio.run(_run(list(parts), voice, out_path))
+    try:
+        words = asyncio.run(_run(list(parts), voice, out_path))
+    except Exception as e:
+        # No dejes un .mp3 vacío/parcial tras un fallo.
+        try:
+            if os.path.exists(out_path) and os.path.getsize(out_path) == 0:
+                os.remove(out_path)
+        except OSError:
+            pass
+        raise RuntimeError(
+            "No se pudo generar la voz con edge-tts. Comprueba:\n"
+            "  • que tengas conexión a internet (edge-tts usa el servicio de "
+            "Microsoft Edge),\n"
+            "  • que ninguna red/proxy/firewall bloquee speech.platform.bing.com,\n"
+            f"  • que la voz exista (voz='{voice}'; lista: 'edge-tts --list-voices').\n"
+            f"Detalle técnico: {type(e).__name__}: {e}"
+        ) from e
 
     if not words:
         dur = _try_duration(out_path) or 0.0

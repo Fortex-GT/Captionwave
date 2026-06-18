@@ -104,10 +104,38 @@ class CaptionGenerator:
         if not words:
             raise RuntimeError("El TTS no devolvió palabras. ¿Conexión a internet / voz válida?")
 
-        # 2) Agrupar en líneas
-        lines = chunk_words(words, self.style.max_words, self.style.max_chars, total=dur)
+        # 2) Construir subtítulos a partir de los tiempos por palabra del TTS
+        resultado = self.build_from_words(
+            words, dur, out_ass=out_ass, out_srt=out_srt, out_emojis=out_emojis,
+        )
+        resultado["audio"] = out_audio
+        return resultado
 
-        # 3) Emojis: por línea (para el .ass) y por palabra (para overlay propio)
+    # -- API sin TTS (offline) --
+    def build_from_words(
+        self,
+        words,
+        duration: float,
+        out_ass: Optional[str] = "subs.ass",
+        out_srt: Optional[str] = None,
+        out_emojis: Optional[str] = None,
+    ) -> dict:
+        """Construye los subtítulos a partir de tiempos por palabra ya calculados.
+
+        No usa TTS ni internet: tú aportas
+        ``words = [{"word", "start", "dur"}, ...]`` (en segundos) y la duración
+        total. Útil para pruebas, pipelines offline o cuando ya tienes los
+        tiempos de otra fuente.
+
+        Devuelve el mismo dict que ``generate`` (con ``audio=None``).
+        """
+        if not words:
+            raise ValueError("`words` está vacío: no hay nada que subtitular.")
+
+        # 1) Agrupar en líneas
+        lines = chunk_words(words, self.style.max_words, self.style.max_chars, total=duration)
+
+        # 2) Emojis: por línea (para el .ass) y por palabra (para overlay propio)
         emojis_palabra = []
         if self.use_emoji and self._picker:
             for i, ln in enumerate(lines):
@@ -120,8 +148,7 @@ class CaptionGenerator:
                     "dur": round(w["dur"], 3),
                 })
 
-        # 4) Escribir .ass
-        ass_text = None
+        # 3) Escribir .ass
         if out_ass:
             ass_text = _ass.build_ass(
                 lines, self.style, resolution=self.resolution,
@@ -130,21 +157,21 @@ class CaptionGenerator:
             with open(out_ass, "w", encoding="utf-8") as f:
                 f.write(ass_text)
 
-        # 5) Escribir .srt (opcional)
+        # 4) Escribir .srt (opcional)
         if out_srt:
             with open(out_srt, "w", encoding="utf-8") as f:
                 f.write(_srt.build_srt(lines, uppercase=self.style.uppercase))
 
-        # 6) Escribir emojis.json (opcional, para superponer arte de Apple)
+        # 5) Escribir emojis.json (opcional, para superponer arte propio)
         if out_emojis and self.use_emoji:
             with open(out_emojis, "w", encoding="utf-8") as f:
                 json.dump(emojis_palabra, f, ensure_ascii=False, indent=2)
 
         return {
-            "audio": out_audio,
+            "audio": None,
             "ass": out_ass,
             "srt": out_srt,
-            "duration": dur,
+            "duration": duration,
             "words": words,
             "lines": [
                 {"text": ln["text"], "start": ln["start"], "end": ln["end"],
