@@ -215,17 +215,9 @@ troceado en líneas, la selección de emojis y la escritura de `.ass`/`.srt`.
 
 ---
 
-## Publicar tu propia copia
 
-> **Antes de subir a PyPI, verifica que el nombre `captionwave` esté libre** en https://pypi.org. Si no lo está, renómbralo: cambia la carpeta `src/captionwave/` y el campo `name` de `pyproject.toml`.
 
-```bash
-pip install build twine
-python -m build
-twine upload dist/*
-```
 
-Para GitHub solo inicializa el repo y súbelo normal.
 
 ---
 
