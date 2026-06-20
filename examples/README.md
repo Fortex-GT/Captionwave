@@ -4,46 +4,49 @@ Estos scripts usan la librería tal como se usaría tras instalarla con `pip`.
 
 ## 1. Instalar el paquete
 
-Desde la raíz del repositorio (recomendado en modo editable para desarrollo):
-
-```bash
-pip install -e .
-```
-
-O una instalación normal desde el código fuente:
-
-```bash
-pip install .
-```
-
-Cuando el paquete esté publicado en PyPI, bastará con:
-
 ```bash
 pip install captionwave
 ```
 
-Extras opcionales:
+Para desarrollo, desde la raíz del repositorio:
 
 ```bash
-pip install -e ".[duration]"   # mutagen: duración exacta del audio (recomendado)
-pip install -e ".[video]"      # moviepy: para montar el video desde Python
+pip install -e ".[test]"   # incluye pytest
 ```
+
+Extras opcionales: `".[duration]"` (mutagen, duración exacta del audio) y
+`".[video]"` (moviepy).
 
 ## 2. Ejecutar los ejemplos
 
-| Script | Necesita internet | Necesita FFmpeg | Qué hace |
+| Script | Internet | FFmpeg | Qué hace |
 |--------|:---:|:---:|----------|
-| [`offline_sin_internet.py`](offline_sin_internet.py) | ❌ | ❌ | Genera `.ass`/`.srt` a partir de tiempos por palabra dados a mano. **Ideal para verificar la instalación.** |
+| [`offline_sin_internet.py`](offline_sin_internet.py) | ❌ | ❌ | `.ass`/`.srt` a partir de tiempos dados a mano. **Ideal para verificar la instalación.** |
 | [`basico.py`](basico.py) | ✅ | ❌ | Voz (edge-tts) + subtítulos + emojis sincronizados. |
-| [`montaje_ffmpeg.py`](montaje_ffmpeg.py) | ✅ | ✅ | Lo anterior y además quema los subtítulos sobre una imagen → `salida.mp4`. |
+| [`texto_a_mp4.py`](texto_a_mp4.py) | ✅ | ✅ | Todo el flujo → `salida.mp4` sobre un fondo de color (sin archivos extra). |
+| [`emojis_a_color_mp4.py`](emojis_a_color_mp4.py) | ✅ | ✅ | Como el anterior pero con **emojis a color** superpuestos (PNG de Twemoji). |
+| [`montaje_ffmpeg.py`](montaje_ffmpeg.py) | ✅ | ✅ | Quema los subtítulos sobre **tu propia** imagen/vídeo de fondo. |
 
 ```bash
-python examples/offline_sin_internet.py   # empieza por este
-python examples/basico.py                  # requiere conexión a internet
-python examples/montaje_ffmpeg.py          # requiere internet + FFmpeg + fondo.jpg
+python examples/offline_sin_internet.py   # empieza por este (sin internet)
+python examples/basico.py                  # voz + subtítulos
+python examples/texto_a_mp4.py             # MP4 final (fondo de color)
+python examples/emojis_a_color_mp4.py      # MP4 con emojis a color
+python examples/montaje_ffmpeg.py          # usa tu propio fondo.jpg
 ```
 
-> `basico.py` y `montaje_ffmpeg.py` usan **edge-tts**, que se conecta al servicio
-> de Microsoft Edge (`speech.platform.bing.com`). Si una red/proxy/firewall lo
-> bloquea, la librería lanza un error claro explicando la causa. En ese caso usa
+> Los ejemplos que usan voz llaman a **edge-tts** (servicio de Microsoft Edge).
+> Si una red/proxy lo bloquea, la librería lanza un error claro; en ese caso usa
 > `offline_sin_internet.py`, que no necesita red.
+
+### En Google Colab
+
+Pon la instalación en su propia celda con `!` y, para bajar el resultado, usa el
+módulo de Colab:
+
+```python
+!pip install -q captionwave
+!apt-get -qq install -y ffmpeg fonts-noto-emoji > /dev/null
+# ...código del ejemplo...
+from google.colab import files; files.download("salida.mp4")
+```

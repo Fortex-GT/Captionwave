@@ -7,9 +7,9 @@ Tú montas el video con FFmpeg/MoviePy usando esos archivos.
 
 from .core import CaptionGenerator, chunk_words
 from .styles import Style, PRESETS, get_style, list_styles, hex_to_ass
-from .emojis import EmojiPicker
+from .emojis import EmojiPicker, emoji_for_word, CURADOS
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __all__ = [
     "CaptionGenerator",
     "chunk_words",
@@ -19,4 +19,6 @@ __all__ = [
     "list_styles",
     "hex_to_ass",
     "EmojiPicker",
+    "emoji_for_word",
+    "CURADOS",
 ]

@@ -14,19 +14,13 @@ La librería **no arma el video final**: te entrega los archivos (audio + subtí
 ## Instalación
 
 ```bash
-pip install captionwave          # una vez publicado en PyPI
+pip install captionwave
 ```
 
-Mientras tanto —o en notebooks como Google Colab— instálalo desde GitHub:
+O desde el código fuente, para desarrollo:
 
 ```bash
-pip install "git+https://github.com/Fortex-GT/Captionwave.git"
-```
-
-O desde el código fuente (este repositorio):
-
-```bash
-pip install .          # o, para desarrollo:  pip install -e .
+pip install -e .
 ```
 
 Requisitos:
@@ -183,6 +177,19 @@ Con eso colocas tu PNG de emoji (que tú aportas) en `start` durante `dur`. Así
 
 Si prefieres incrustar el carácter directamente en el `.ass` de todas formas, está activado por defecto (`emoji_in_ass=True`); ponlo en `False` si vas a usar overlay.
 
+> 💡 Para **emojis a color** (sin cuadritos) en el video, mira el ejemplo
+> [`examples/emojis_a_color_mp4.py`](examples/emojis_a_color_mp4.py): genera los
+> subtítulos con `emoji_in_ass=False` y superpone cada emoji como PNG a color.
+
+El emoji de cada palabra sale de un **diccionario curado extenso** (cientos de
+palabras en español). Puedes consultarlo directamente:
+
+```python
+from captionwave import emoji_for_word
+emoji_for_word("estrella")   # -> "⭐"
+emoji_for_word("planeta")    # -> "🪐"
+```
+
 ---
 
 ## Qué devuelve `generate(...)`
@@ -212,12 +219,6 @@ pytest
 
 Los tests **no necesitan internet** (no llaman al TTS): cubren los estilos, el
 troceado en líneas, la selección de emojis y la escritura de `.ass`/`.srt`.
-
----
-
-
-
-
 
 ---
 

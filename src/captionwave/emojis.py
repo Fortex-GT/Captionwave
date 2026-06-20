@@ -34,37 +34,117 @@ _STOP = {
     "diez", "cien", "mil", "veces", "vez", "casi", "tan", "tanto", "cerca",
 }
 
-# Diccionario curado: control fino para palabras clave frecuentes.
+# Diccionario curado palabra -> emoji. Solo emojis muy difundidos (un único
+# punto de código, salvo el selector de variación FE0F) para que se rendericen
+# bien y exista su PNG en Twemoji al superponerlos en el video (sin cuadritos).
 CURADOS = {
+    # --- Espacio y astronomía ---
     "estrella": "⭐", "estrellas": "⭐", "estelar": "⭐",
-    "galaxia": "🌌", "galaxias": "🌌", "universo": "🌌", "cosmos": "🌌",
-    "tierra": "🌍", "mundo": "🌍", "planeta": "🪐", "planetas": "🪐",
-    "agua": "💧", "liquido": "💧", "oceano": "🌊", "mar": "🌊", "ola": "🌊",
-    "arbol": "🌳", "arboles": "🌳", "bosque": "🌳", "selva": "🌳", "planta": "🌱",
-    "cometa": "☄️", "meteorito": "☄️", "asteroide": "☄️",
-    "luz": "💡", "brillo": "💡", "ilumina": "💡",
-    "energia": "⚡", "electricidad": "⚡", "rayo": "⚡", "rayos": "⚡",
-    "explosion": "💥", "estalla": "💥", "impacto": "💥", "choque": "💥",
-    "molecula": "⚛️", "atomo": "⚛️", "particula": "⚛️", "neutron": "⚛️",
-    "proton": "⚛️", "electron": "⚛️",
-    "quimica": "🧪", "reaccion": "🧪", "experimento": "🔬", "ciencia": "🔬",
-    "cientifico": "🔬", "microscopio": "🔬",
-    "celula": "🦠", "celulas": "🦠", "virus": "🦠", "bacteria": "🦠", "microbio": "🦠",
-    "dinosaurio": "🦕", "dinosaurios": "🦕", "fosil": "🦴",
-    "terremoto": "🌋", "sismo": "🌋", "volcan": "🌋",
-    "numero": "🔢", "numeros": "🔢", "millones": "🔢", "miles": "🔢",
-    "diamante": "💎", "cristal": "💎", "oro": "🪙",
+    "galaxia": "🌌", "universo": "🌌", "cosmos": "🌌", "nebulosa": "🌌",
+    "tierra": "🌍", "mundo": "🌍", "planeta": "🪐", "planetas": "🪐", "orbita": "🪐",
+    "sol": "☀️", "solar": "☀️", "luna": "🌙", "lunar": "🌙", "eclipse": "🌑",
+    "cohete": "🚀", "nave": "🚀", "astronauta": "🚀", "espacio": "🚀", "satelite": "🛰️",
+    "telescopio": "🔭", "astronomia": "🔭",
+    "cometa": "☄️", "meteorito": "☄️", "asteroide": "☄️", "meteoro": "☄️",
+
+    # --- Ciencia, física y química ---
+    "ciencia": "🔬", "cientifico": "🔬", "experimento": "🔬", "microscopio": "🔬",
+    "laboratorio": "🔬", "quimica": "🧪", "reaccion": "🧪", "formula": "🧪", "elemento": "🧪",
+    "molecula": "⚛️", "atomo": "⚛️", "particula": "⚛️", "neutron": "⚛️", "proton": "⚛️",
+    "electron": "⚛️", "nuclear": "☢️", "radiacion": "☢️", "radiactivo": "☢️",
+    "energia": "⚡", "electricidad": "⚡", "rayo": "⚡", "rayos": "⚡", "voltaje": "⚡",
+    "iman": "🧲", "magnetico": "🧲", "magnetismo": "🧲", "gravedad": "🌐",
+    "luz": "💡", "brillo": "💡", "idea": "💡", "ilumina": "💡", "bombilla": "💡",
+    "explosion": "💥", "estalla": "💥", "impacto": "💥", "choque": "💥", "bomba": "💣",
+    "matematica": "🔢", "numero": "🔢", "numeros": "🔢", "cifra": "🔢", "calculo": "🧮",
+
+    # --- Cuerpo humano y salud ---
+    "cerebro": "🧠", "mente": "🧠", "neurona": "🧠", "memoria": "🧠", "pensamiento": "🧠",
+    "corazon": "❤️", "latido": "❤️", "pulso": "❤️", "amor": "❤️",
+    "sangre": "🩸", "hueso": "🦴", "huesos": "🦴", "esqueleto": "💀", "craneo": "💀",
+    "ojo": "👀", "ojos": "👀", "vista": "👀", "mirada": "👀",
+    "oido": "👂", "oreja": "👂", "nariz": "👃", "olfato": "👃",
+    "boca": "👄", "diente": "🦷", "dientes": "🦷", "lengua": "👅",
+    "mano": "✋", "manos": "✋", "dedo": "👆", "pie": "🦶", "pierna": "🦵", "brazo": "💪",
+    "musculo": "💪", "fuerza": "💪", "pulmon": "🫁", "pulmones": "🫁", "oxigeno": "🫁",
+    "salud": "🩺", "medico": "🩺", "doctor": "🩺", "medicina": "💊", "pastilla": "💊",
+    "vacuna": "💉", "inyeccion": "💉", "aguja": "💉",
+    "adn": "🧬", "gen": "🧬", "genetica": "🧬", "celula": "🦠", "celulas": "🦠",
+    "virus": "🦠", "bacteria": "🦠", "microbio": "🦠", "germen": "🦠",
+
+    # --- Naturaleza, clima y geografía ---
+    "agua": "💧", "gota": "💧", "liquido": "💧", "lluvia": "🌧️", "tormenta": "⛈️",
+    "oceano": "🌊", "mar": "🌊", "ola": "🌊", "olas": "🌊", "marea": "🌊",
+    "rio": "🏞️", "lago": "🏞️", "cascada": "🏞️", "montaña": "⛰️", "montañas": "⛰️",
+    "volcan": "🌋", "lava": "🌋", "erupcion": "🌋", "terremoto": "🌋", "sismo": "🌋",
+    "fuego": "🔥", "llama": "🔥", "calor": "🔥", "caliente": "🔥", "incendio": "🔥",
+    "frio": "❄️", "nieve": "❄️", "congelado": "❄️", "hielo": "🧊", "glaciar": "🧊",
+    "viento": "💨", "aire": "💨", "gas": "💨", "huracan": "🌀", "tornado": "🌀",
+    "nube": "☁️", "nubes": "☁️", "niebla": "🌫️", "arcoiris": "🌈", "temperatura": "🌡️",
+    "arbol": "🌳", "arboles": "🌳", "bosque": "🌳", "selva": "🌳", "madera": "🪵",
+    "planta": "🌱", "semilla": "🌱", "hoja": "🍃", "flor": "🌸", "flores": "🌸",
+    "desierto": "🏜️", "arena": "🏜️", "isla": "🏝️", "playa": "🏖️",
+
+    # --- Animales ---
+    "animal": "🐾", "animales": "🐾", "perro": "🐶", "gato": "🐱", "leon": "🦁",
+    "tigre": "🐯", "oso": "🐻", "lobo": "🐺", "zorro": "🦊", "conejo": "🐰",
+    "raton": "🐭", "caballo": "🐴", "vaca": "🐮", "cerdo": "🐷", "mono": "🐵",
+    "elefante": "🐘", "jirafa": "🦒", "cebra": "🦓", "rinoceronte": "🦏",
+    "pajaro": "🐦", "aguila": "🦅", "buho": "🦉", "pinguino": "🐧", "loro": "🦜",
+    "pez": "🐟", "peces": "🐟", "tiburon": "🦈", "ballena": "🐳", "delfin": "🐬",
+    "pulpo": "🐙", "cangrejo": "🦀", "tortuga": "🐢", "serpiente": "🐍", "cocodrilo": "🐊",
+    "rana": "🐸", "araña": "🕷️", "abeja": "🐝", "mariposa": "🦋", "hormiga": "🐜",
+    "insecto": "🐛", "gusano": "🐛", "dinosaurio": "🦕", "dinosaurios": "🦕", "fosil": "🦴",
+
+    # --- Comida y bebida ---
+    "comida": "🍔", "comer": "🍴", "hambre": "🍴", "fruta": "🍎", "manzana": "🍎",
+    "platano": "🍌", "naranja": "🍊", "uva": "🍇", "fresa": "🍓", "limon": "🍋",
+    "pan": "🍞", "queso": "🧀", "huevo": "🥚", "carne": "🍖", "pollo": "🍗",
+    "pizza": "🍕", "cafe": "☕", "leche": "🥛", "azucar": "🍬", "miel": "🍯",
+    "chocolate": "🍫", "pastel": "🍰", "bebida": "🥤",
+
+    # --- Tecnología e internet ---
+    "computadora": "💻", "ordenador": "💻", "laptop": "💻", "pantalla": "🖥️", "monitor": "🖥️",
+    "telefono": "📱", "celular": "📱", "movil": "📱", "smartphone": "📱",
+    "internet": "🌐", "web": "🌐", "red": "🌐", "online": "🌐", "wifi": "📶", "señal": "📶",
+    "robot": "🤖", "inteligencia": "🤖", "algoritmo": "🤖", "codigo": "💻", "programa": "💻",
+    "dato": "💾", "datos": "💾", "archivo": "📁", "disco": "💿",
+    "camara": "📷", "foto": "📷", "video": "🎥", "pelicula": "🎬", "television": "📺",
+    "bateria": "🔋", "carga": "🔋", "enchufe": "🔌", "cable": "🔌",
+
+    # --- Dinero, trabajo y economía ---
+    "dinero": "💰", "moneda": "🪙", "monedas": "🪙", "oro": "🪙", "plata": "🪙",
+    "billete": "💵", "dolar": "💵", "euro": "💶", "banco": "🏦", "pago": "💳",
+    "tarjeta": "💳", "precio": "🏷️", "compra": "🛒", "tienda": "🏪", "negocio": "💼",
+    "trabajo": "💼", "empresa": "🏢", "fabrica": "🏭", "grafico": "📈", "crecimiento": "📈",
+    "diamante": "💎", "cristal": "💎", "joya": "💎", "tesoro": "💰", "riqueza": "💰",
+
+    # --- Tiempo, lugares y transporte ---
+    "tiempo": "⏳", "reloj": "⏰", "hora": "⏰", "minuto": "⏱️", "segundo": "⏱️",
+    "año": "📅", "años": "📅", "mes": "📅", "dia": "🌞", "noche": "🌙", "siglo": "📅",
+    "casa": "🏠", "hogar": "🏠", "edificio": "🏢", "ciudad": "🏙️", "puente": "🌉",
+    "castillo": "🏰", "templo": "🏛️", "iglesia": "⛪", "mapa": "🗺️", "ubicacion": "📍",
+    "viaje": "✈️", "avion": "✈️", "vuelo": "✈️", "coche": "🚗", "carro": "🚗", "auto": "🚗",
+    "tren": "🚆", "barco": "🚢", "bicicleta": "🚲", "moto": "🏍️", "camion": "🚚",
+
+    # --- Personas, emociones e ideas ---
+    "persona": "🧑", "gente": "👥", "humano": "🧑", "familia": "👪", "bebe": "👶",
+    "rey": "👑", "reina": "👑", "corona": "👑", "feliz": "😀", "alegria": "😀",
+    "risa": "😂", "triste": "😢", "llanto": "😢", "miedo": "😱", "sorpresa": "😮",
+    "enojo": "😡", "beso": "💋", "sueño": "💤", "dormir": "💤",
+    "pensar": "🤔", "duda": "🤔", "secreto": "🤫", "silencio": "🤫", "genio": "🧞",
+
+    # --- Acciones y conceptos varios ---
+    "musica": "🎵", "cancion": "🎵", "sonido": "🔊", "ruido": "🔊", "voz": "🗣️", "hablar": "🗣️",
+    "libro": "📚", "leer": "📖", "lectura": "📖", "estudio": "📚", "escuela": "🏫",
+    "arte": "🎨", "pintura": "🎨", "color": "🎨", "deporte": "⚽", "futbol": "⚽",
+    "juego": "🎮", "ganar": "🏆", "premio": "🏆", "campeon": "🏆",
+    "guerra": "⚔️", "batalla": "⚔️", "arma": "⚔️", "escudo": "🛡️", "proteccion": "🛡️",
+    "llave": "🔑", "candado": "🔒", "seguridad": "🔒", "peligro": "⚠️", "alerta": "⚠️",
+    "prohibido": "🚫", "correcto": "✅", "error": "❌", "muerte": "💀", "fantasma": "👻",
+    "magia": "✨", "magico": "✨", "regalo": "🎁", "fiesta": "🎉", "celebracion": "🎉",
+    "globo": "🎈", "bandera": "🚩", "objetivo": "🎯", "meta": "🎯", "diana": "🎯",
     "velocidad": "⚡", "veloz": "⚡", "rapido": "⚡",
-    "calor": "🔥", "caliente": "🔥", "fuego": "🔥",
-    "temperatura": "🌡️", "frio": "❄️", "congelado": "❄️", "hielo": "🧊",
-    "aire": "💨", "viento": "💨", "gas": "💨",
-    "oxigeno": "🫁", "pulmon": "🫁", "pulmones": "🫁",
-    "sonido": "🔊", "oido": "👂", "musica": "🎵",
-    "computadora": "💻", "ordenador": "💻", "datos": "💻",
-    "tiempo": "⏳", "reloj": "⏰", "año": "📅", "años": "📅", "siglo": "📅",
-    "cerebro": "🧠", "corazon": "❤️", "sangre": "🩸", "hueso": "🦴",
-    "sol": "☀️", "luna": "🌙", "noche": "🌙", "dia": "🌞",
-    "dinero": "💰", "ojo": "👀", "ojos": "👀", "mente": "🧠",
 }
 
 # Emojis de respaldo cuando no se encuentra nada relevante.
@@ -159,3 +239,22 @@ class EmojiPicker:
             return False
         ver = d.get("E")
         return isinstance(ver, (int, float)) and ver <= self.max_version
+
+
+@functools.lru_cache(maxsize=4)
+def _default_picker(max_version: float = 15.0) -> EmojiPicker:
+    return EmojiPicker(max_version)
+
+
+def emoji_for_word(word: str, max_version: float = 15.0):
+    """Devuelve el emoji asignado a una palabra, o ``None`` si no hay uno claro.
+
+    Combina el diccionario curado :data:`CURADOS` (cientos de palabras en
+    español) con el índice de la librería ``emoji`` filtrado por versión de
+    Unicode, para evitar "cuadritos". Pensado para usarse directamente::
+
+        from captionwave import emoji_for_word
+        emoji_for_word("estrella")   # -> "⭐"
+        emoji_for_word("planeta")    # -> "🪐"
+    """
+    return _default_picker(max_version).for_word(word)

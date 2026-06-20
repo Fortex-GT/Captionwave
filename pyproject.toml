@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "captionwave"
-version = "0.1.0"
+version = "0.2.0"
 description = "Genera audio + subtítulos animados sincronizados (.ass/.srt) a partir de texto, con emojis compatibles con iOS."
 readme = "README.md"
 requires-python = ">=3.9"

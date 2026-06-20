@@ -1,4 +1,16 @@
-from captionwave import EmojiPicker
+from captionwave import CURADOS, EmojiPicker, emoji_for_word
+
+
+def test_emoji_for_word_public_api():
+    assert emoji_for_word("estrella") == "⭐"
+    assert emoji_for_word("planeta") == "🪐"
+    assert emoji_for_word("cerebro") == "🧠"
+    assert emoji_for_word("de") is None
+
+
+def test_curados_is_extensive_and_valid():
+    assert len(CURADOS) >= 200
+    assert all(isinstance(v, str) and v for v in CURADOS.values())
 
 
 def test_curated_words():
