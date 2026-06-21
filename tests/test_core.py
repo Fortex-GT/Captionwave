@@ -23,6 +23,15 @@ def test_chunk_words_is_continuous():
     assert lines[-1]["end"] >= DUR
 
 
+def test_chunk_words_respects_max_chars():
+    largas = "computadora ordenador laptop rinoceronte electricidad sol".split()
+    ws = [{"word": w, "start": i * 0.5, "dur": 0.4} for i, w in enumerate(largas)]
+    lines = chunk_words(ws, max_words=3, max_chars=18, total=10)
+    # Ninguna línea supera max_chars (salvo que sea una sola palabra muy larga).
+    for ln in lines:
+        assert len(ln["words"]) == 1 or len(ln["text"]) <= 18
+
+
 def test_build_from_words_writes_files(tmp_path):
     gen = CaptionGenerator(style="hormozi")
     ass = tmp_path / "s.ass"

@@ -1,5 +1,9 @@
 # captionwave
 
+[![PyPI](https://img.shields.io/pypi/v/captionwave.svg)](https://pypi.org/project/captionwave/)
+[![Python](https://img.shields.io/pypi/pyversions/captionwave.svg)](https://pypi.org/project/captionwave/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Genera **audio (voz)** y **subtítulos animados sincronizados** (`.ass` + `.srt`) a partir de una variable de texto. Pensado para Shorts / Reels / TikTok estilo "¿Sabías que…?".
 
 La librería **no arma el video final**: te entrega los archivos (audio + subtítulos + emojis con tiempos) para que tú montes el video como prefieras (FFmpeg, tu editor, MoviePy…). Así tienes control total y no reprogramas los subtítulos en cada proyecto.
@@ -189,6 +193,234 @@ from captionwave import emoji_for_word
 emoji_for_word("estrella")   # -> "⭐"
 emoji_for_word("planeta")    # -> "🪐"
 ```
+
+<details>
+<summary><b>Ver el diccionario completo (407 palabras → 218 emojis)</b></summary>
+
+Todas estas palabras tienen un emoji asignado **con PNG a color en Twemoji**, así que al superponerlo en el video se ve a color (nunca como cuadrito).
+
+| Emoji | Palabras que lo activan |
+|:---:|---|
+| 🐝 | abeja |
+| 🧬 | adn, gen, genetica |
+| 💧 | agua, gota, liquido |
+| 🦅 | aguila |
+| 💉 | aguja, inyeccion, vacuna |
+| 💨 | aire, gas, viento |
+| 😀 | alegria, feliz |
+| ⚠️ | alerta, peligro |
+| 🤖 | algoritmo, inteligencia, robot |
+| ❤️ | amor, corazon, latido, pulso |
+| 🐾 | animal, animales |
+| 🕷️ | araña |
+| 🌳 | arbol, arboles, bosque, selva |
+| 📁 | archivo |
+| 🌈 | arcoiris |
+| 🏜️ | arena, desierto |
+| ⚔️ | arma, batalla, guerra |
+| 🎨 | arte, color, pintura |
+| ☄️ | asteroide, cometa, meteorito, meteoro |
+| 🚀 | astronauta, cohete, espacio, nave |
+| 🔭 | astronomia, telescopio |
+| ⚛️ | atomo, electron, molecula, neutron, particula, proton |
+| 🚗 | auto, carro, coche |
+| ✈️ | avion, viaje, vuelo |
+| 🍬 | azucar |
+| 📅 | año, años, mes, siglo |
+| 🦠 | bacteria, celula, celulas, germen, microbio, virus |
+| 🐳 | ballena |
+| 🏦 | banco |
+| 🚩 | bandera |
+| 🚢 | barco |
+| 🔋 | bateria, carga |
+| 👶 | bebe |
+| 🥤 | bebida |
+| 💋 | beso |
+| 🚲 | bicicleta |
+| 💵 | billete, dolar |
+| 👄 | boca |
+| 💣 | bomba |
+| 💡 | bombilla, brillo, idea, ilumina, luz |
+| 💪 | brazo, fuerza, musculo |
+| 🦉 | buho |
+| 🐴 | caballo |
+| 🔌 | cable, enchufe |
+| ☕ | cafe |
+| 🧮 | calculo |
+| 🔥 | caliente, calor, fuego, incendio, llama |
+| 📷 | camara, foto |
+| 🚚 | camion |
+| 🏆 | campeon, ganar, premio |
+| 🎵 | cancion, musica |
+| 🔒 | candado, seguridad |
+| 🦀 | cangrejo |
+| 🍖 | carne |
+| 🏠 | casa, hogar |
+| 🏞️ | cascada, lago, rio |
+| 🏰 | castillo |
+| 🦓 | cebra |
+| 🎉 | celebracion, fiesta |
+| 📱 | celular, movil, smartphone, telefono |
+| 🐷 | cerdo |
+| 🧠 | cerebro, memoria, mente, neurona, pensamiento |
+| 🍫 | chocolate |
+| 💥 | choque, estalla, explosion, impacto |
+| 🔬 | ciencia, cientifico, experimento, laboratorio, microscopio |
+| 🔢 | cifra, matematica, numero, numeros |
+| 🏙️ | ciudad |
+| 🐊 | cocodrilo |
+| 💻 | codigo, computadora, laptop, ordenador, programa |
+| 🍴 | comer, hambre |
+| 🍔 | comida |
+| 🛒 | compra |
+| 🐰 | conejo |
+| ❄️ | congelado, frio, nieve |
+| 👑 | corona, reina, rey |
+| ✅ | correcto |
+| 🌌 | cosmos, galaxia, nebulosa, universo |
+| 💀 | craneo, esqueleto, muerte |
+| 📈 | crecimiento, grafico |
+| 💎 | cristal, diamante, joya |
+| 💾 | dato, datos |
+| 👆 | dedo |
+| 🐬 | delfin |
+| ⚽ | deporte, futbol |
+| 🌞 | dia |
+| 🎯 | diana, meta, objetivo |
+| 🦷 | diente, dientes |
+| 💰 | dinero, riqueza, tesoro |
+| 🦕 | dinosaurio, dinosaurios |
+| 💿 | disco |
+| 🩺 | doctor, medico, salud |
+| 💤 | dormir, sueño |
+| 🤔 | duda, pensar |
+| 🌑 | eclipse |
+| 🏢 | edificio, empresa |
+| ⚡ | electricidad, energia, rapido, rayo, rayos, velocidad, veloz, voltaje |
+| 🐘 | elefante |
+| 🧪 | elemento, formula, quimica, reaccion |
+| 😡 | enojo |
+| ❌ | error |
+| 🌋 | erupcion, lava, sismo, terremoto, volcan |
+| 🛡️ | escudo, proteccion |
+| 🏫 | escuela |
+| ⭐ | estelar, estrella, estrellas |
+| 📚 | estudio, libro |
+| 💶 | euro |
+| 🏭 | fabrica |
+| 👪 | familia |
+| 👻 | fantasma |
+| 🌸 | flor, flores |
+| 🦴 | fosil, hueso, huesos |
+| 🍓 | fresa |
+| 🍎 | fruta, manzana |
+| 🐱 | gato |
+| 🧞 | genio |
+| 👥 | gente |
+| 🧊 | glaciar, hielo |
+| 🎈 | globo |
+| 🌐 | gravedad, internet, online, red, web |
+| 🐛 | gusano, insecto |
+| 🗣️ | hablar, voz |
+| 🍃 | hoja |
+| ⏰ | hora, reloj |
+| 🐜 | hormiga |
+| 🥚 | huevo |
+| 🧑 | humano, persona |
+| 🌀 | huracan, tornado |
+| ⛪ | iglesia |
+| 🧲 | iman, magnetico, magnetismo |
+| 🏝️ | isla |
+| 🦒 | jirafa |
+| 🎮 | juego |
+| 🥛 | leche |
+| 📖 | lectura, leer |
+| 👅 | lengua |
+| 🦁 | leon |
+| 🍋 | limon |
+| 😢 | llanto, triste |
+| 🔑 | llave |
+| 🌧️ | lluvia |
+| 🐺 | lobo |
+| 🦜 | loro |
+| 🌙 | luna, lunar, noche |
+| 🪵 | madera |
+| ✨ | magia, magico |
+| ✋ | mano, manos |
+| 🗺️ | mapa |
+| 🌊 | mar, marea, oceano, ola, olas |
+| 🦋 | mariposa |
+| 💊 | medicina, pastilla |
+| 😱 | miedo |
+| 🍯 | miel |
+| ⏱️ | minuto, segundo |
+| 👀 | mirada, ojo, ojos, vista |
+| 🪙 | moneda, monedas, oro, plata |
+| 🖥️ | monitor, pantalla |
+| 🐵 | mono |
+| ⛰️ | montaña, montañas |
+| 🏍️ | moto |
+| 🌍 | mundo, tierra |
+| 🍊 | naranja |
+| 👃 | nariz, olfato |
+| 💼 | negocio, trabajo |
+| 🌫️ | niebla |
+| ☁️ | nube, nubes |
+| ☢️ | nuclear, radiacion, radiactivo |
+| 👂 | oido, oreja |
+| 🪐 | orbita, planeta, planetas |
+| 🐻 | oso |
+| 🫁 | oxigeno, pulmon, pulmones |
+| 💳 | pago, tarjeta |
+| 🐦 | pajaro |
+| 🍞 | pan |
+| 🍰 | pastel |
+| 🐟 | peces, pez |
+| 🎬 | pelicula |
+| 🐶 | perro |
+| 🦶 | pie |
+| 🦵 | pierna |
+| 🐧 | pinguino |
+| 🍕 | pizza |
+| 🌱 | planta, semilla |
+| 🍌 | platano |
+| 🏖️ | playa |
+| 🍗 | pollo |
+| 🏷️ | precio |
+| 🚫 | prohibido |
+| 🌉 | puente |
+| 🐙 | pulpo |
+| 🧀 | queso |
+| 🐸 | rana |
+| 🐭 | raton |
+| 🎁 | regalo |
+| 🦏 | rinoceronte |
+| 😂 | risa |
+| 🔊 | ruido, sonido |
+| 🩸 | sangre |
+| 🛰️ | satelite |
+| 🤫 | secreto, silencio |
+| 🐍 | serpiente |
+| 📶 | señal, wifi |
+| ☀️ | sol, solar |
+| 😮 | sorpresa |
+| 📺 | television |
+| 🌡️ | temperatura |
+| 🏛️ | templo |
+| 🦈 | tiburon |
+| ⏳ | tiempo |
+| 🏪 | tienda |
+| 🐯 | tigre |
+| ⛈️ | tormenta |
+| 🐢 | tortuga |
+| 🚆 | tren |
+| 📍 | ubicacion |
+| 🍇 | uva |
+| 🐮 | vaca |
+| 🎥 | video |
+| 🦊 | zorro |
+
+</details>
 
 ---
 

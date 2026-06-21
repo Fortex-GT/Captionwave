@@ -146,11 +146,12 @@ def _header(style: Style, W: int, H: int) -> str:
     bold = -1 if style.bold else 0
     align = _alignment(style.position)
     margin_v = 0 if style.position == "center" else style.margin_v
+    mh = style.margin_h
 
     return (
         "[Script Info]\n"
         "ScriptType: v4.00+\n"
-        "WrapStyle: 2\n"
+        "WrapStyle: 0\n"
         "ScaledBorderAndShadow: yes\n"
         f"PlayResX: {W}\n"
         f"PlayResY: {H}\n"
@@ -163,7 +164,7 @@ def _header(style: Style, W: int, H: int) -> str:
         "Alignment, MarginL, MarginR, MarginV, Encoding\n"
         f"Style: Main,{style.font},{style.font_size},{primary},{secondary},"
         f"{outline},{back},{bold},0,0,0,100,100,0,0,1,{style.outline_w},"
-        f"{style.shadow},{align},60,60,{margin_v},1\n"
+        f"{style.shadow},{align},{mh},{mh},{margin_v},1\n"
         f"Style: Emoji,{style.font},96,&H00FFFFFF,&H00FFFFFF,&H00000000,"
         f"&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1\n"
         "\n"

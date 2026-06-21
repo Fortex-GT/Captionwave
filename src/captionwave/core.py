@@ -30,15 +30,19 @@ from . import srt_writer as _srt
 
 
 def chunk_words(words, max_words=3, max_chars=18, total=None):
-    """Agrupa palabras en líneas. Devuelve lista de dicts con start/end/words/text."""
+    """Agrupa palabras en líneas. Devuelve lista de dicts con start/end/words/text.
+
+    Una línea se cierra *antes* de superar `max_chars` (o `max_words`), de modo
+    que el texto no se desborde de los márgenes del video.
+    """
     lines = []
     cur = []
     for w in words:
-        cur.append(w)
-        txt = " ".join(x["word"] for x in cur)
-        if len(cur) >= max_words or len(txt) >= max_chars:
+        propuesto = " ".join(x["word"] for x in cur + [w])
+        if cur and (len(cur) >= max_words or len(propuesto) > max_chars):
             lines.append(cur)
             cur = []
+        cur.append(w)
     if cur:
         lines.append(cur)
 

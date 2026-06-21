@@ -71,6 +71,7 @@ class Style:
     # Posición: "center" (medio de la pantalla), "lower" (abajo), "upper" (arriba)
     position: str = "center"
     margin_v: int = 260               # margen vertical cuando position != center
+    margin_h: int = 90                # margen lateral (evita que el texto toque los bordes)
 
     def copy(self, **cambios) -> "Style":
         """Devuelve una copia del estilo con los campos indicados modificados."""
