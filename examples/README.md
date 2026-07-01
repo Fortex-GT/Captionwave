@@ -24,7 +24,7 @@ Extras opcionales: `".[duration]"` (mutagen, duración exacta del audio) y
 | [`offline_sin_internet.py`](offline_sin_internet.py) | ❌ | ❌ | `.ass`/`.srt` a partir de tiempos dados a mano. **Ideal para verificar la instalación.** |
 | [`basico.py`](basico.py) | ✅ | ❌ | Voz (edge-tts) + subtítulos + emojis sincronizados. |
 | [`texto_a_mp4.py`](texto_a_mp4.py) | ✅ | ✅ | Todo el flujo → `salida.mp4` sobre un fondo de color (sin archivos extra). |
-| [`emojis_a_color_mp4.py`](emojis_a_color_mp4.py) | ✅ | ✅ | Como el anterior pero con **emojis a color** superpuestos (PNG de Twemoji). |
+| [`emojis_a_color_mp4.py`](emojis_a_color_mp4.py) | ✅ | ✅ | Como el anterior pero con **emojis a color** superpuestos (PNG de Twemoji), sin solaparse. Pon `USAR_TODO_EL_DICCIONARIO = True` para narrar las 407 palabras del diccionario. |
 | [`montaje_ffmpeg.py`](montaje_ffmpeg.py) | ✅ | ✅ | Quema los subtítulos sobre **tu propia** imagen/vídeo de fondo. |
 
 ```bash
